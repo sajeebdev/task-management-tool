@@ -1,0 +1,24 @@
+.card-items{
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 20px;
+padding: 25px;
+}
+
+.press{
+    color: rgb(247, 128, 43);
+}
+.modal-text{
+color: black;
+font-weight: 500;
+margin-left: 10px;
+}
+@media only screen and (max-width: 600px) {
+    .card-items{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+        padding: 25px;
+        }
+
+  }

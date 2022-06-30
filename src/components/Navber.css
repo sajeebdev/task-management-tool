@@ -1,0 +1,27 @@
+.navber{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-right: 20px;
+
+
+}
+.navber li{
+    margin-right: 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: red;
+    font-weight: 500;
+
+}
+.active{
+    border-bottom: 2px solid rgb(247, 128, 43);;
+
+    border-radius: 2px 2px;
+}
+.logo{
+    font-size: 16px;
+    text-transform: uppercase;
+    color: rgb(248, 130, 45);
+}
