@@ -5,7 +5,7 @@ const Completetask = ({completetask}) => {
     const handeldelete=(_id)=>{
         //  console.log(_id)
         if(window.confirm() == true ){
-          fetch(`http://localhost:5000/completedelete/${_id}`, {
+          fetch(`https://dry-spire-73040.herokuapp.com/completedelete/${_id}`, {
             method: "DELETE",
           })
             .then((res) => res.json())

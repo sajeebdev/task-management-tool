@@ -7,7 +7,7 @@ const [alltask ,setAlltask] = useState([]);
 const [updateid, setUpdateid] = useState('');
 
 useEffect(()=>{
-    fetch("http://localhost:5000/task")
+    fetch("https://dry-spire-73040.herokuapp.com/task")
     .then(res=>res.json())
     .then(data=>setAlltask(data))
 },[alltask])
@@ -15,7 +15,7 @@ useEffect(()=>{
 const handeldelete=(_id)=>{
 //  console.log(_id)
 if(window.confirm() == true ){
-  fetch(`http://localhost:5000/task/${_id}`, {
+  fetch(`https://dry-spire-73040.herokuapp.com/task/${_id}`, {
     method: "DELETE",
   })
     .then((res) => res.json())
@@ -49,7 +49,7 @@ const handelsunmit = (e) =>{
      task: e.target.task.value,
    }
   
-  fetch(`http://localhost:5000/updatetask/${updateid}`, {
+  fetch(`https://dry-spire-73040.herokuapp.com/updatetask/${updateid}`, {
     method: "PATCH",
     headers: {
       "content-type": "application/json",
@@ -74,7 +74,7 @@ const id = task._id;
     task:task.task,
   }
   console.log(data,id);
-  fetch(`http://localhost:5000/complete/${id}`, {
+  fetch(`https://dry-spire-73040.herokuapp.com/complete/${id}`, {
     method: "PUT",
     headers: {
       "content-type": "application/json",
