@@ -5,7 +5,7 @@ const Home = () => {
     const [alltask ,setAlltask] = useState([]);
 
     useEffect(()=>{
-        fetch("https://dry-spire-73040.herokuapp.com/task")
+        fetch("http://localhost:5000/task")
         .then(res=>res.json())
         .then(data=>setAlltask(data))
     },[alltask])
@@ -22,7 +22,7 @@ const Home = () => {
                     task : ev.target.value
                    }
                    console.log (data);
-                   const url = `https://dry-spire-73040.herokuapp.com/addtask`;
+                   const url = `http://localhost:5000/addtask`;
                    fetch(url, {
                        method:'POST',
                        headers: {
