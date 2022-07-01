@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import ShortTodo from './ShortTodo';
-
+import './Home.css';
 const Home = () => {
     const [alltask ,setAlltask] = useState([]);
 
     useEffect(()=>{
-        fetch("http://localhost:5000/task")
+        fetch("https://dry-spire-73040.herokuapp.com/task")
         .then(res=>res.json())
         .then(data=>setAlltask(data))
     },[alltask])
   
 
     return (
-        <div className=''>
+        <div className='display-view'>
              
             <div className="text-center my-5">
                <input className='input input-bordered input-warning w-full max-w-xs ' placeholder="Type here" onKeyPress={(ev) => {
@@ -22,7 +22,7 @@ const Home = () => {
                     task : ev.target.value
                    }
                    console.log (data);
-                   const url = `http://localhost:5000/addtask`;
+                   const url = `https://dry-spire-73040.herokuapp.com/addtask`;
                    fetch(url, {
                        method:'POST',
                        headers: {

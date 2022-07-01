@@ -5,23 +5,18 @@ const Todo = () => {
     const [alltask ,setAlltask] = useState([]);
 
     useEffect(()=>{
-        fetch("http://localhost:5000/task")
+        fetch("https://dry-spire-73040.herokuapp.com/task")
         .then(res=>res.json())
         .then(data=>setAlltask(data))
-    },[])
+    },[alltask])
   
     return (
-        <div>
+        <div className='display-view'>
 
             <div className=" card-items">
-            {
-                   alltask.map(alltask=><TodoTask
-                    key={alltask._id}
-                    alltask={alltask}
-
-                   ></TodoTask>)
-               }
+            <TodoTask/>
            </div>
+          
 
             </div>
          

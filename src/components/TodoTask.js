@@ -1,19 +1,29 @@
-import React, { useDebugValue } from 'react';
+import React, { useDebugValue, useEffect, useState } from 'react';
 
-const TodoTask = ({alltask}) => {
+const TodoTask = () => {
 
-const {_id,task}=alltask;
+// const {_id,task}=alltask;
+const [alltask ,setAlltask] = useState([]);
+const [updateid, setUpdateid] = useState('');
 
-const handeldelete=()=>{
+useEffect(()=>{
+    fetch("https://dry-spire-73040.herokuapp.com/task")
+    .then(res=>res.json())
+    .then(data=>setAlltask(data))
+},[alltask])
 
+const handeldelete=(_id)=>{
+//  console.log(_id)
 if(window.confirm() == true ){
-  fetch(`http://localhost:5000/task/${_id}`, {
+  fetch(`https://dry-spire-73040.herokuapp.com/task/${_id}`, {
     method: "DELETE",
   })
     .then((res) => res.json())
     .then((data) =>{
       if(data.deletedCount==1){
-        setTimeout(function() { window.location=window.location;},500);
+
+        // setTimeout(function() { window.location=window.location;},500);
+           
       }
 
     });
@@ -24,14 +34,22 @@ else{
 }
  
 }
+const getid = (_id)=>{
+  console.log(_id);
+  setUpdateid(_id);
 
-const handelsunmit =(e)=>{
+
+}
+// console.log(updateid);
+const handelsunmit = (e) =>{
+
   e.preventDefault();
+  
   const data = {
      task: e.target.task.value,
    }
-  console.log(data);
-  fetch(`http://localhost:5000/updatetask/${_id}`, {
+  
+  fetch(`https://dry-spire-73040.herokuapp.com/updatetask/${updateid}`, {
     method: "PATCH",
     headers: {
       "content-type": "application/json",
@@ -43,18 +61,22 @@ const handelsunmit =(e)=>{
       console.log(data);
 
     });
-
+    e.target.task.value="";
 
 }
 
 
     return (
+      <>
+      {
+        alltask.map(task=>
       <div class="card w-96 bg-neutral text-neutral-content">
-      <div class="card-body items-center text-center">
-        <h2 class="card-title">{task}</h2>
+           <div class="card-body items-center text-center"
+        key={task._id}>
+        <h2 class="card-title">{task.task}</h2>
      
         <div class="card-actions justify-end mt-10 text-sm">
-        <label for="my-modal-6" class="btn btn-info">Edit</label>
+        <label onClick={()=>getid(task._id)}  for="my-modal-6" class="btn btn-info">Edit</label>
         
          
           <button class="btn gap-2 btn-outline text-green-500 ">
@@ -62,17 +84,18 @@ const handelsunmit =(e)=>{
           complete
         </button>
 
-        <button onClick={handeldelete} class="btn btn-circle btn-outline text-red-500">
+        <button  onClick={()=>handeldelete(task._id)} class="btn btn-circle btn-outline text-red-500">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
 
         </div>
       </div>
-      <div className="">
-        <input type="checkbox" id="my-modal-6" class="modal-toggle" />
+      
+      <input type="checkbox" id="my-modal-6" class="modal-toggle" />
         <div class="modal modal-bottom sm:modal-middle">
-          <form onSubmit={handelsunmit} class="modal-box">
+          <form onSubmit={handelsunmit}  class="modal-box">
           <input className=' input input-bordered input-warning w-full max-w-xs modal-text ' placeholder="Type here" type='text' name='task' ></input>
+          <p>{task._id}</p>
           <input className='modal-text btn btn-info'type='submit' value="Update"  ></input>
         
             <div class="modal-action">
@@ -80,10 +103,13 @@ const handelsunmit =(e)=>{
             </div>
           </form>
         </div>
-       </div>
+     
      
     </div>
+  )}
 
+     
+  </>
     );
 };
 
