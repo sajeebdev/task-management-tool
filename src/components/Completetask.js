@@ -1,27 +1,42 @@
 import React from 'react';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 const Completetask = ({completetask}) => {
     
     const handeldelete=(_id)=>{
-        //  console.log(_id)
-        if(window.confirm() == true ){
-          fetch(`https://dry-spire-73040.herokuapp.com/completedelete/${_id}`, {
+     
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+
+              fetch(`https://dry-spire-73040.herokuapp.com/completedelete/${_id}`, {
             method: "DELETE",
           })
             .then((res) => res.json())
             .then((data) =>{
               if(data.deletedCount==1){
         
-                // setTimeout(function() { window.location=window.location;},500);
-                   
+                toast.error('Delete success!')
               }
         
             });
-          
-        }
-        else{
-         console.log('no delete count')
-        }
+            }
+          })
+
         }
 
     return (

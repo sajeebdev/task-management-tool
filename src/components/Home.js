@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ShortTodo from './ShortTodo';
+import { toast } from 'react-toastify';
 import './Home.css';
 const Home = () => {
     const [alltask ,setAlltask] = useState([]);
@@ -36,7 +37,7 @@ const Home = () => {
                       
                     } )
                    ev.target.value="";
-
+                    toast.success('Tasks added.')
                    }
                    
                  }} 
